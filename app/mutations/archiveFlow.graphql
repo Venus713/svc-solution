@@ -1,0 +1,3 @@
+archiveFlow(
+  id: ID!
+) : Flow

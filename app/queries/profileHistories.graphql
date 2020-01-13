@@ -1,0 +1,8 @@
+profileHistories (
+  id: [String]
+  parent: String
+  profileId: String
+  limit: Int = 25
+  offset: Int = 0
+  sort: [Sort]
+) : ProfileHistoryList

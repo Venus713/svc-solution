@@ -1,0 +1,4 @@
+type FlowList {
+  count: Int
+  data: [Flow]
+}

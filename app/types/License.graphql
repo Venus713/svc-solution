@@ -1,0 +1,11 @@
+type License {
+  id: String
+  name: String
+  type: String
+  seats: Int
+  expiry: Date
+  active: Boolean
+  serial: String
+  createdAt: Date
+  updatedAt: Date
+}

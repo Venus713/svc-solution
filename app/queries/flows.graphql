@@ -1,0 +1,13 @@
+flows (
+  id: [String]
+  name: String
+  active: Boolean
+  internalId: String
+  filters: [FilterType]
+  category: String
+  description: String
+  version: String
+  limit: Int = 25
+  offset: Int = 0
+  sort: [Sort]
+) : FlowList

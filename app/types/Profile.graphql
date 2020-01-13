@@ -1,0 +1,42 @@
+type Profile {
+  id: ID!
+  parent: String
+  tags: [String]
+  description: String
+  version: String
+  order: Int
+  flowId: String
+  flow: ProfileFlow
+  name: String
+  author: ProfileAuthor
+  createdAt: Date
+  updatedAt: Date
+}
+
+type ProfileAuthor {
+  id: String
+  name: String
+  internalId: String
+}
+
+type ProfileFlow {
+  id: String
+  name: String
+  version: String
+}
+
+input FilterType {
+  field: String!
+  value: JSONObject!
+  operator: FilterOperator
+}
+
+enum FilterOperator {
+  equals
+  gte
+  gt
+  lte
+  lt
+  in
+  contains
+}

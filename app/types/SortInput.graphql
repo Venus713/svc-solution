@@ -1,0 +1,9 @@
+input Sort {
+  field: String
+  type: SortType
+}
+
+enum SortType {
+  ASC
+  DESC
+}

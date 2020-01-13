@@ -1,0 +1,4 @@
+type ProfileList {
+  count: Int
+  data: [Profile]
+}

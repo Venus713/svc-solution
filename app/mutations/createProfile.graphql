@@ -1,0 +1,7 @@
+createProfile(
+  flowId: String!
+  name: String!
+  version: String
+  tags: [String]
+  description: String
+) : Profile

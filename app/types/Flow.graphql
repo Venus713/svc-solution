@@ -1,0 +1,21 @@
+type Flow {
+  id: ID!
+  name: String
+  data: JSONObject
+  tags: [String]
+  parent: String
+  category: String
+  author: FlowAuthor
+  createdAt: Date
+  updatedAt: Date
+  version: String
+  modules: [FlowModule]
+  order: Int
+  description: String
+}
+
+type FlowAuthor {
+  id: String
+  name: String
+  internalId: String
+}

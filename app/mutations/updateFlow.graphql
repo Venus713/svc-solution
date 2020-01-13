@@ -1,0 +1,8 @@
+updateFlow(
+  id: ID!
+  name: String
+  data: JSONObject!
+  description: String
+  tags: [String]
+  category: String
+) : Flow

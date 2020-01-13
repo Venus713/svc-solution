@@ -1,0 +1,17 @@
+type ProfileHistory {
+  id: ID!
+  profileId: String
+  parent: String
+  tags: [String]
+  description: String
+  version: String
+  order: Int
+  flowId: String
+  flow: ProfileFlow
+  change: JSONObject
+  name: String
+  author: ProfileAuthor
+  updatedBy: ProfileAuthor
+  createdAt: Date
+  updatedAt: Date
+}

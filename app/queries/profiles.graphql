@@ -1,0 +1,13 @@
+profiles (
+  id: [String]
+  parent: String
+  name: String
+  enabled: Boolean
+  description: String
+  version: String
+  flowId: String
+  filters: [FilterType]
+  limit: Int = 25
+  offset: Int = 0
+  sort: [Sort]
+) : ProfileList

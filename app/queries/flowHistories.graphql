@@ -1,0 +1,7 @@
+flowHistories (
+  id: [String]
+  flowId: String
+  limit: Int = 25
+  offset: Int = 0
+  sort: [Sort]
+) : FlowHistoryList

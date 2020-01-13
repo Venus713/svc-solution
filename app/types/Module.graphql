@@ -1,0 +1,38 @@
+type Module {
+  id: String
+  name: String
+  parent: String
+  description: String
+  tags: [String]
+  type: String
+  author: ModuleAuthor
+  createdAt: Date
+  updatedAt: Date
+  version: String
+  order: Int
+  gitRepository: String
+  data: [DataRow]
+}
+
+type FlowModule {
+  id: String
+  name: String
+  version: String
+}
+
+type ModuleAuthor {
+  id: String
+  name: String
+  internalId: String
+}
+
+type DataRow {
+  key: String
+  value: Mixed
+}
+
+enum UpdateMode {
+  MAJOR
+  MINOR
+  PATCH
+}

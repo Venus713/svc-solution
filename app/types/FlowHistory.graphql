@@ -1,0 +1,16 @@
+type FlowHistory {
+  id: ID!
+  flowId: String
+  name: String
+  data: JSONObject
+  modules: [FlowModule]
+  tags: [String]
+  parent: String
+  author: FlowAuthor
+  createdAt: Date
+  updatedAt: Date
+  description: String
+  version: String
+  order: Int
+  updatedBy: ModuleAuthor
+}

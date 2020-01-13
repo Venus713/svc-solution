@@ -1,0 +1,67 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: svc-solution
+spec:
+  selector:
+    matchLabels:
+      app: svc-solution
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: svc-solution
+    spec:
+      containers:
+        - name: svc-solution
+          image: 101399050792.dkr.ecr.eu-central-1.amazonaws.com/svc-solution:<VERSION>
+          env:
+            - name: DB_URI
+              valueFrom:
+                secretKeyRef:
+                  key: DB_URI
+                  name: svc-solution
+            - name: HOST
+              valueFrom:
+                secretKeyRef:
+                  key: HOST
+                  name: svc-solution
+            - name: NODE_ENV
+              valueFrom:
+                secretKeyRef:
+                  key: NODE_ENV
+                  name: svc-solution
+            - name: AUTH_SERVICE
+              valueFrom:
+                secretKeyRef:
+                  key: AUTH_SERVICE
+                  name: svc-solution
+            - name: DEVICE_SERVICE
+              valueFrom:
+                secretKeyRef:
+                  key: DEVICE_SERVICE
+                  name: svc-solution
+            - name: MEDIA_SERVICE
+              valueFrom:
+                secretKeyRef:
+                  key: MEDIA_SERVICE
+                  name: svc-solution
+            - name: LOGZIO_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: LOGZIO_TOKEN
+                  name: svc-solution
+            - name: LOGZIO_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: LOGZIO_HOST
+                  name: svc-solution
+            - name: PORT
+              value: "3000"
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi

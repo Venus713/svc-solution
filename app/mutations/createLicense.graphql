@@ -1,0 +1,7 @@
+createLicense(
+  name: String!
+  type: String!
+  seats: Int!
+  expiry: Date
+  active: Boolean
+): License

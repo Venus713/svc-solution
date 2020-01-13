@@ -1,0 +1,3 @@
+archiveProfile(
+  id: ID!
+) : Profile

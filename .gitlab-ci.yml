@@ -1,0 +1,78 @@
+stages:
+  - versioning
+  - build
+  - release
+
+variables:
+  CI_TOKEN: $PERSONAL_CI_ACCESS_TOKEN
+  REPO_HOST: gitlab.com/TopKamera/svc-solution.git
+
+versioning:
+  image: docker:latest
+  before_script:
+    - apk add git nodejs nodejs-npm
+  services:
+    - docker:dind
+  stage: versioning
+  except:
+    refs:
+      - tags
+  only:
+    - master
+  script:
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+    - echo ${REPO_HOST}
+    - git remote set-url origin "https://gitlab-ci-token:${CI_TOKEN}@${REPO_HOST}"
+    - npm version patch -m "[ci skip] Release[$CI_COMMIT_SHORT_SHA] - $CI_COMMIT_MESSAGE"
+    - git push origin HEAD:$CI_COMMIT_REF_NAME --tags
+
+build:
+  stage: build
+  image: node:11.15.0
+  script:
+    - npm install
+    - npm install --only=dev
+    # - npm test --silent
+  only:
+    - merge_requests
+    - master
+
+release:
+  stage: release
+  image: docker:latest
+  environment:
+    name: staging
+    url: https://beta.viso.ai/solution/graphql
+  services:
+    - docker:dind
+  before_script:
+    - echo $ECR_REPO
+    - apk update
+    - apk add python-dev jq curl zip
+    - apk add py-pip
+    - apk add curl
+    - pip install awscli
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set region eu-central-1
+    - $(aws ecr get-login --no-include-email)
+    - export PACKAGE_VERSION=$(jq -r '.version' ./package.json)
+    - export DOCKER_TAG="${PACKAGE_VERSION}-${CI_COMMIT_SHORT_SHA}"
+    - export CONTAINER_IMAGE="${ECR_REPO}:${DOCKER_TAG}"
+    - curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.13.7/2019-06-11/bin/linux/amd64/aws-iam-authenticator
+    - chmod +x ./aws-iam-authenticator
+    - mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$HOME/bin:$PATH
+    - echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+    - aws eks --region eu-central-1 update-kubeconfig --name $EKS_CLUSTER_NAME
+    - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+    - chmod +x ./kubectl
+    - mv ./kubectl /usr/local/bin/kubectl
+    - kubectl version
+
+  script:
+    - docker build -t $CONTAINER_IMAGE .
+    - docker push $CONTAINER_IMAGE
+    - kubectl kustomize k8s | sed "s/<VERSION>/${DOCKER_TAG}/g" | kubectl apply -f -
+  only:
+    - master

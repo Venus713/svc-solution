@@ -1,0 +1,9 @@
+updateModule(
+  id: ID!
+  name: String
+  description: String
+  updateMode: UpdateMode
+  type: String
+  tags: [String]
+  gitRepository: String
+) : Module

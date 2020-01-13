@@ -1,0 +1,7 @@
+createModule(
+  name: String!
+  type: String!
+  description: String
+  tags: [String]
+  gitRepository: String
+): Module

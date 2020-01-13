@@ -1,0 +1,8 @@
+commonLabels:
+  app: svc-solution
+  viso.ai/type: service
+  viso.ai/name: solution
+
+resources:
+  - deployment.yaml
+  - service.yaml

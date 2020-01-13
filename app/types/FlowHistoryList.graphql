@@ -1,0 +1,4 @@
+type FlowHistoryList {
+  count: Int
+  data: [FlowHistory]
+}

@@ -1,0 +1,7 @@
+updateProfile(
+  id: ID!
+  flowId: String
+  name: String
+  tags: [String]
+  description: String
+) : Profile

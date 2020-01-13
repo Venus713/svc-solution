@@ -1,0 +1,12 @@
+modules (
+  id: [String]
+  name: String
+  type: [String]
+  filters: [FilterType]
+  description: String
+  parent: String
+  version: String
+  limit: Int = 25
+  offset: Int = 0
+  sort: [Sort]
+) : ModuleList

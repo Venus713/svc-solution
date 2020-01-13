@@ -1,0 +1,16 @@
+type ModuleHistory {
+  id: String
+  moduleId: String
+  parent: String
+  name: String
+  description: String
+  tags: [String]
+  type: String
+  author: ModuleAuthor
+  createdAt: Date
+  updatedAt: Date
+  updatedBy: ModuleAuthor
+  version: String
+  order: Int
+  gitRepository: String
+}

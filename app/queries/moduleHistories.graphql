@@ -1,0 +1,8 @@
+moduleHistories (
+  id: [String]
+  moduleId: String
+  parent: String
+  limit: Int = 25
+  offset: Int = 0
+  sort: [Sort]
+) : ModuleHistoryList
