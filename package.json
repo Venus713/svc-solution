@@ -33,7 +33,7 @@
     "graphql-request": "1.8.2",
     "jsonwebtoken": "8.4.0",
     "lib-core": "git+https://hamzakamera:Ys-rJxU4sr4yQUvRjyo3@gitlab.com/TopKamera/lib-core.git#v1.5.11",
-    "lodash": "4.17.11",
+    "lodash": "4.17.19",
     "merge-graphql-schemas": "1.5.3",
     "mongoose": "5.2.13",
     "nanoid": "^2.1.7",
